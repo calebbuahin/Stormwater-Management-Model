@@ -25,7 +25,9 @@ buildprod*/
 /build/
 *.o
 /Debug/
-./bin
+/bin/
+/lib/
+/CMakeFiles/
 ./C
 
 # Git merge files
