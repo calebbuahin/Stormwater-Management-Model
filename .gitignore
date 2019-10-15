@@ -25,7 +25,8 @@ buildprod*/
 /build/
 *.o
 /Debug/
-
+./bin
+./C
 
 # Git merge files
 *.orig
