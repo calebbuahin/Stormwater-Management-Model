@@ -29,6 +29,7 @@ buildprod*/
 /lib/
 /CMakeFiles/
 ./C
+Makefile
 
 # Git merge files
 *.orig
