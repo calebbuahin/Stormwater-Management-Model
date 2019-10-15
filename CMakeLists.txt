@@ -31,7 +31,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Sets compiler flags when building with Visual Studio.
 if(MSVC)
-    set(CMAKE_C_FLAGS "/fp:fast /fp:except- /EHsc ")
+    set(CMAKE_C_FLAGS "/fp:strict /fp:except- /EHsc ")
     set(CMAKE_C_FLAGS_DEBUG "/ZI /Od /Gm  /RTC1")
     set(CMAKE_C_FLAGS_RELEASE "/Zi /O2 /Oi /GL /MT /Gy")
 
@@ -42,8 +42,8 @@ endif(MSVC)
 
 # Set compiler flags when building on UNIX.
 if(UNIX AND NOT APPLE)
-	set(CMAKE_C_FLAGS "-fopenmp -Ofast")
-	set(CMAKE_CXX_FLAGS "-std=c++11 -fopenmp -Wno-write-strings -Ofast")
+	set(CMAKE_C_FLAGS "-fopenmp -Ofast -ffloat-store")
+	set(CMAKE_CXX_FLAGS "-std=c++11 -fopenmp -Wno-write-strings -Ofast -ffloat-store")
     # add_definitions(-std=c99)
 endif(UNIX AND NOT APPLE)
 
@@ -57,9 +57,9 @@ if(APPLE)
     		message(STATUS "This program supports OpenMP on Mac through Brew. Please run \"brew install libomp\"")
 		else()
     		execute_process(COMMAND ${BREW} --prefix libomp OUTPUT_VARIABLE BREW_LIBOMP_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
-       	 	set(OpenMP_C_FLAGS "-Ofast -Xpreprocessor -fopenmp -lomp -Wno-unused-command-line-argument" CACHE INTERNAL "")
+       	 	set(OpenMP_C_FLAGS "-Ofast -ffloat-store -Xpreprocessor -fopenmp -lomp -Wno-unused-command-line-argument" CACHE INTERNAL "")
         	set(OpenMP_C_LIB_NAMES "omp")
-			set(OpenMP_CXX_FLAGS "-Ofast -Xpreprocessor -fopenmp -lomp -Wno-unused-command-line-argument" CACHE INTERNAL "")
+			set(OpenMP_CXX_FLAGS "-Ofast  -ffloat-store -Xpreprocessor -fopenmp -lomp -Wno-unused-command-line-argument" CACHE INTERNAL "")
         	set(OpenMP_CXX_LIB_NAMES "omp")
         	set(OpenMP_omp_LIBRARY "${BREW_LIBOMP_PREFIX}/lib/libomp.dylib")
         	include_directories("${BREW_LIBOMP_PREFIX}/include")
